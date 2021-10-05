@@ -8,11 +8,8 @@ class ToDoList {
   List<Category> categories = <Category>[];
 
 
-  void addTask(List<Task> tasksToAdd){// List<Category> categoriesToAdd) {
+  void addTask(List<Task> tasksToAdd) {
     tasks.addAll(tasksToAdd);
-    /*if(categories == categoriesToAdd) {
-      categories.addAll(categoriesToAdd);
-    }*/
   }
 
   void deleteTask(int id){
@@ -21,16 +18,6 @@ class ToDoList {
 
   List<Task> getAll() {
     return tasks;
-  }
-
-  void setCategory(String categoryToAdd) {
-    tasks.add(categoryToAdd);
-  }
-
-  void setDayOfWeek(){
-    if(tasks. is RecurringTask){
-
-    }
   }
 
   Map<String, int> getCategories() {
