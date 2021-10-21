@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:todo_list/models/task.dart';
+import 'package:todo_list/models/task.dart';
+import 'package:todo_list/models/task.dart';
 import 'package:todo_list/screens/taskpage.dart';
 
+import '../todo_list.dart';
 import '../widgets.dart';
 
 class Homepage extends StatefulWidget {
@@ -12,6 +16,16 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
+
+  _HomepageState() {
+    ToDoList.tasks = <Task>[
+      Task(id: 1, title: 'one', category: categories.shopping),
+      Task(id: 2, title: 'onee', category: categories.shopping),
+      Task(id: 3, title: 'onew', category: categories.shopping),
+      Task(id: 4, title: 'oneq', category: categories.shopping),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,29 +51,20 @@ class _HomepageState extends State<Homepage> {
                     ),
                   ),
                   Expanded(
-                    child: ListView(
-                      children: [
-                        TaskCardWidget(
-                            title: 'code',
-                            desc: 'Description Added. first Simple description'
-                        ),
-                        TaskCardWidget(
-                            title: 'get',
-                            desc: 'Description Added. Simple first description'
-                        ),
-                        TaskCardWidget(
-                            title: 'start',
-                            desc: 'Description Added. Simple (not so) description'
-                        ),
-                        TaskCardWidget(
-                            title: 'start',
-                            desc: 'Description Added. Simple (not so) description'
-                        ),
-                        TaskCardWidget(
-                            title: 'start',
-                            desc: 'Description Added. Simple (not so) description'
-                        ),
-                      ],
+                    child: ListView.builder(
+                      itemCount: ToDoList.tasks.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return TaskCardWidget(
+                            id: ToDoList.tasks[index].id,
+                            title: ToDoList.tasks[index].title,
+                            category: ToDoList.tasks[index].category.toString(),
+                            onDelete: () {
+                              setState(() {
+                                ToDoList.deleteTask(ToDoList.tasks[index].id);
+                              });
+                            },
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -72,7 +77,13 @@ class _HomepageState extends State<Homepage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Taskpage()
+                        builder: (context) => Taskpage(
+                          onAdd: () {
+                            setState(() {
+                              //ToDoList.addTask(toDoList.tasks);
+                            });
+                          },
+                        ),
                       ),
                     );
                   },

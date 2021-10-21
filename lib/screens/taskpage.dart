@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/models/task.dart';
+import 'package:todo_list/screens/homepage.dart';
 import 'package:todo_list/todo_list.dart';
 
 class Taskpage extends StatefulWidget {
-  //final Task task;
+  final Function() onAdd;
 
-  //Taskpage({@required this.task});
+  Taskpage({required this.onAdd});
 
   @override
   _TaskpageState createState() => _TaskpageState();
 }
 
 class _TaskpageState extends State<Taskpage> {
+  //ToDoList toDoList = ToDoList(<Task>[]);
 
   @override
   Widget build(BuildContext context) {
@@ -43,19 +45,13 @@ class _TaskpageState extends State<Taskpage> {
                         ),
                         Expanded(
                           child: TextField(
-                            onSubmitted: (value) async {
+                            onSubmitted: (value)  {
                               if(value != '') {
-                                ToDoList _dbList = ToDoList();
-
-                                Task _newTask = Task(
-                                  id: 1,
-                                  title: value,
-                                  description: value,
-                                  category: value,
-                                );
-
-                                await _dbList.insertTask(_newTask);
-                                print('new task created');
+                                onAdd() {
+                                  setState(() {
+                                    //toDoList.addTask();
+                                  });
+                                };
                               }
                             },
                             decoration: InputDecoration(
@@ -116,10 +112,11 @@ class _TaskpageState extends State<Taskpage> {
                 right: 0.0,
                 child: GestureDetector(
                   onTap: () {
+                    //onAdd();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Taskpage()
+                          builder: (context) => Homepage()
                       ),
                     );
                   },

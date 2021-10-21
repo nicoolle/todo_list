@@ -4,24 +4,29 @@ import "package:collection/collection.dart";
 import 'models/task.dart';
 
 class ToDoList {
-  List<Task> tasks = <Task>[];
-  List<Category> categories = <Category>[];
+  static List<Task> tasks = <Task>[];
+  static List<Category> categories = <Category>[];
 
+  ToDoList();
 
-  void addTask(List<Task> tasksToAdd) {
+ /*void addTask(List<Task> tasksToAdd) {
     tasks.addAll(tasksToAdd);
-  }
 
-  void deleteTask(int id){
+  void addTask(BuildContext context) {
+    var tasks =
+  }*/
+
+  static void deleteTask(int id){
     tasks.removeWhere((element) => element.id == id);
   }
 
-  List<Task> getAll() {
+  static List<Task> getAll() {
     return tasks;
   }
 
+/*
   Map<String, int> getCategories() {
-    var categories = groupBy(tasks, (Task task) => task.category).map((k, v) => MapEntry(k, v.length));
-    return categories;
-  }
+    var categoriess = groupBy(tasks, (Task task) => task.category).map((k, v) => MapEntry(k, v.length));
+    return categoriess;
+  }*/
 }

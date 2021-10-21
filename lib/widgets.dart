@@ -1,12 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'screens/taskpage.dart';
+import 'package:todo_list/todo_list.dart';
 
 class TaskCardWidget extends StatelessWidget {
+  final int id;
   final String title;
-  final String desc;
-  TaskCardWidget({required this.title, required this.desc} );
+  final String category;
+  final void Function() onDelete;
+  TaskCardWidget({
+    required this.id,
+    required this.title,
+    required this.category,
+    required this.onDelete
+  } );
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +33,7 @@ class TaskCardWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            title ?? "(Unmamed Task)",
+            title,
             style: TextStyle(
               color: Color(0xFF211551),
               fontSize: 22.0,
@@ -39,7 +45,7 @@ class TaskCardWidget extends StatelessWidget {
               top: 10.0,
             ),
             child: Text(
-              desc ?? "Description do not Added. Simple description",
+              category,
               style: TextStyle(
                 fontSize: 16.0,
                 color: Color(0xFF86829D),
@@ -52,12 +58,7 @@ class TaskCardWidget extends StatelessWidget {
             right: 0.0,
             child: GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Taskpage()
-                  ),
-                );
+                onDelete();
               },
               child: Container(
                 width: 40.0,
